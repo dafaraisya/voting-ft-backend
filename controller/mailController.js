@@ -27,11 +27,7 @@ var ip = [
 
 // Handle index actions
 exports.send = function (req, res) {
-  if(!ip.includes(req.ip.replace('::ffff:', ''))){
-    console.log(req.ip.replace('::ffff:', ''));
-
-    return res.status(500).send();
-}
+  
   Setting.get(function (err, settings) {
     if (err) {
       res.json({
@@ -48,9 +44,7 @@ exports.send = function (req, res) {
     );
 
     var transporter = nodemailer.createTransport({
-      host: "smtp.zoho.com",
-      port: 465,
-      secure: true,
+      host: "gmail",
       auth: {
         user: setting.email.email,
         pass: setting.email.password,
@@ -82,7 +76,7 @@ exports.send = function (req, res) {
     transporter.sendMail(mailOptions, (err, info) => {
       console.log("error: "+JSON.stringify(err));
       console.log("info: "+JSON.stringify(info));
-      if (err) return res.status(500).send(err);
+      if (err) return res.status(500).json(err);
 
       Participant.findOneAndUpdate(
         {
