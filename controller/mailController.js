@@ -60,16 +60,7 @@ exports.send = function (req, res) {
         req.body.name +
         "</h1><p>Kami mengundang anda untuk mengikuti PEMIRA FT UNS 2020. Berikut kami lampirkan kartu pemilihan anda beserta dengan tata cara pemilihan.</p>",
       attachments: [
-        {
-          filename:
-            "Kartu Pemilihan_" + req.body.name + "_" + req.body.nim + ".png",
-          content: votingCardImage,
-        },
-        {
-          filename: "Tata Cara Pemilihan PEMIRA FT UNS 2020.pdf",
-          contentType: "application/pdf",
-          path: "http://52.163.218.138/procedure.pdf",
-        },
+        
       ],
     };
 
