@@ -22,12 +22,11 @@ var ip = [
   "114.5.109.44",
   "182.2.37.131",
   "120.188.74.160",
-  "182.2.39.180"
+  "182.2.39.180",
 ];
 
 // Handle index actions
 exports.send = function (req, res) {
-  
   Setting.get(function (err, settings) {
     if (err) {
       res.json({
@@ -44,7 +43,9 @@ exports.send = function (req, res) {
     );
 
     var transporter = nodemailer.createTransport({
-      host: "gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
       auth: {
         user: setting.email.email,
         pass: setting.email.password,
@@ -60,14 +61,23 @@ exports.send = function (req, res) {
         req.body.name +
         "</h1><p>Kami mengundang anda untuk mengikuti PEMIRA FT UNS 2020. Berikut kami lampirkan kartu pemilihan anda beserta dengan tata cara pemilihan.</p>",
       attachments: [
-        
+        {
+          filename:
+            "Kartu Pemilihan_" + req.body.name + "_" + req.body.nim + ".png",
+          content: votingCardImage,
+        },
+        {
+          filename: "Tata Cara Pemilihan PEMIRA FT UNS 2020.pdf",
+          contentType: "application/pdf",
+          path: "http://52.163.218.138/procedure.pdf",
+        },
       ],
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
-      console.log("setting: "+JSON.stringify(setting));
-      console.log("error: "+JSON.stringify(err));
-      console.log("info: "+JSON.stringify(info));
+      console.log("setting: " + JSON.stringify(setting));
+      console.log("error: " + JSON.stringify(err));
+      console.log("info: " + JSON.stringify(info));
       if (err) return res.status(500).json(err);
 
       Participant.findOneAndUpdate(
@@ -80,7 +90,7 @@ exports.send = function (req, res) {
           },
         },
         function (err, participant) {
-          if (err) return res.status(500).send(err);    
+          if (err) return res.status(500).send(err);
 
           return res.json({
             message: "New Email sent!",
