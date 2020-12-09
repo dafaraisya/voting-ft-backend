@@ -54,11 +54,11 @@ exports.send = function (req, res) {
     var mailOptions = {
       from: setting.email.email,
       to: req.body.to,
-      subject: "PEMIRA FMIPA UNS 2020",
+      subject: "PEMIRA FT UNS 2020",
       html:
         "<h1>Halo " +
         req.body.name +
-        "</h1><p>Kami mengundang anda untuk mengikuti PEMIRA FMIPA UNS 2020. Berikut kami lampirkan kartu pemilihan anda beserta dengan tata cara pemilihan.</p>",
+        "</h1><p>Kami mengundang anda untuk mengikuti PEMIRA FT UNS 2020. Berikut kami lampirkan kartu pemilihan anda beserta dengan tata cara pemilihan.</p>",
       attachments: [
         {
           filename:
@@ -66,14 +66,16 @@ exports.send = function (req, res) {
           content: votingCardImage,
         },
         {
-          filename: "Tata Cara Pemilihan PEMIRA FMIPA UNS 2020.pdf",
+          filename: "Tata Cara Pemilihan PEMIRA FT UNS 2020.pdf",
           contentType: "application/pdf",
-          path: "http://pemira.fmipauns.com/procedure.pdf",
+          path: "http://52.163.218.138/procedure.pdf",
         },
       ],
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
+      console.log("setting: "+JSON.stringify(setting));
+      console.log("mailOptions: " + JSON.stringify(mailOptions));
       console.log("error: "+JSON.stringify(err));
       console.log("info: "+JSON.stringify(info));
       if (err) return res.status(500).json(err);
