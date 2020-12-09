@@ -75,7 +75,6 @@ exports.send = function (req, res) {
 
     transporter.sendMail(mailOptions, (err, info) => {
       console.log("setting: "+JSON.stringify(setting));
-      console.log("mailOptions: " + JSON.stringify(mailOptions));
       console.log("error: "+JSON.stringify(err));
       console.log("info: "+JSON.stringify(info));
       if (err) return res.status(500).json(err);
