@@ -1349,10 +1349,10 @@ exports.new = function (req, res) {
     participant.name = _participant.name;
     participant.nim = _participant.nim;
     participant.email = _participant.email;
-    participant.session.id = "5fd5b40f8430463e5853f062";
-    participant.session.number = 2;
-    participant.session.min = new Date("2020-12-15T14:00:00.000Z");
-    participant.session.max = new Date("2020-12-15T20:00:00.000Z");
+    participant.session.id = "5fd5b4368430463e5853f063";
+    participant.session.number = 3;
+    participant.session.min = new Date("2020-12-16T08:00:00.000Z");
+    participant.session.max = new Date("2020-12-16T14:00:00.000Z");
 
     // Save and validate
     participant.save(function (err) {
