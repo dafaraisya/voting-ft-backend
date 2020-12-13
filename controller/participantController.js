@@ -966,11 +966,11 @@ exports.new = function (req, res) {
     },
   ];
 
-  participants.forEach((participant) => {
+  participants.forEach((_participant) => {
     var participant = new Participant();
-    participant.name = participant.name;
-    participant.nim = participant.nim;
-    participant.email = participant.email;
+    participant.name = _participant.name;
+    participant.nim = _participant.nim;
+    participant.email = _participant.email;
     participant.session.id = "5fd5b3e48430463e5853f061";
     participant.session.number = 1;
     participant.session.min = new Date("2020-12-06T08:00:00.000Z");
