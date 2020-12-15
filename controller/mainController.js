@@ -23,12 +23,18 @@ var ip = [
   "114.5.109.44",
   "182.2.37.131",
   "120.188.74.160",
-  "182.2.39.180"
+  "182.2.39.180",
+  "36.73.209.231",
+  "36.81.10.12"
 ];
 
 // Handle login actions
 exports.login = function (req, res) {
-  
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   Setting.find(
     {
       "authentication.username": req.body.username,
@@ -52,6 +58,11 @@ exports.login = function (req, res) {
 
 // Handle announcement actions
 exports.announcement = function (req, res) {
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   Setting.find({}, function (err, announcement) {
     if (err) throw err;
     res.json({

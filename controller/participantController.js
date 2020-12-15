@@ -22,12 +22,18 @@ var ip = [
   "114.5.109.44",
   "182.2.37.131",
   "120.188.74.160",
-  "182.2.39.180"
+  "182.2.39.180",
+  "36.73.209.231",
+  "36.81.10.12"
 ];
 
 // Handle index actions
 exports.index = function (req, res) {
-  
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   Participant.get(function (err, participants) {
     if (err) {
       return res.json({
@@ -48,7 +54,11 @@ exports.index = function (req, res) {
 
 // Handle search actions
 exports.search = function (req, res) {
-  
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   Participant.find(
     {
       name: {
@@ -76,7 +86,11 @@ exports.search = function (req, res) {
 
 // Handle index actions
 exports.indexByPage = async function (req, res) {
-  
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   var page = req.params.page;
   try {
     var totalParticipant = await Participant.count();
@@ -112,7 +126,11 @@ exports.view = function (req, res) {
 
 // Handle create actions
 exports.new = function (req, res) {
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
 
+    return res.status(500).send();
+  }
   var participant = new Participant();
   participant.name = req.body.name;
   participant.nim = req.body.nim;
@@ -148,7 +166,11 @@ exports.new = function (req, res) {
 // Handle update actions
 exports.update = function (req, res) {
   
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
 
+    return res.status(500).send();
+  }
   var moveSession = false;
   var oldSession = {};
   var newSession = {};
@@ -266,7 +288,11 @@ exports.vote = function (req, res) {
 
 // Handle delete actions
 exports.delete = function (req, res) {
-  
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   Participant.findById(req.params.id, function (err, participant) {
     if (err) return res.send(err);
 
@@ -300,6 +326,11 @@ exports.delete = function (req, res) {
 
 // Handle delete actions
 exports.force_delete = function (req, res) {
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   
   Participant.deleteOne(
     {

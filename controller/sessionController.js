@@ -22,7 +22,9 @@ var ip = [
   "114.5.109.44",
   "182.2.37.131",
   "120.188.74.160",
-  "182.2.39.180"
+  "182.2.39.180",
+  "36.73.209.231",
+  "36.81.10.12"
 ];
 
 // Handle index actions
@@ -44,7 +46,11 @@ exports.index = function (req, res) {
 
 // Handle create actions
 exports.new = function (req, res) {
-  
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   var session = new Session();
   session.number = req.body.number;
   session.start = new Date(req.body.start);
@@ -73,7 +79,11 @@ exports.view = function (req, res) {
 
 // Handle update actions
 exports.update = function (req, res) {
-  
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   Session.findOneAndUpdate(
     { _id: req.params.id },
     {
@@ -123,7 +133,11 @@ exports.update = function (req, res) {
 
 // Handle delete actions
 exports.delete = function (req, res) {
-  
+  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
+    console.log(req.ip.replace("::ffff:", ""));
+
+    return res.status(500).send();
+  }
   Session.remove(
     {
       _id: req.params.id,
