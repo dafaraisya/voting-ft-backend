@@ -92,11 +92,6 @@ exports.new = function (req, res) {
 
 // Handle view actions
 exports.view = function (req, res) {
-  if (!ip.includes(req.ip.replace("::ffff:", ""))) {
-    console.log(req.ip.replace("::ffff:", ""));
-
-    return res.status(500).send();
-  }
   Candidate.findById(req.params.id, function (err, candidate) {
     if (err) return res.send(err);
     return res.json({
