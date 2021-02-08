@@ -65,11 +65,11 @@ exports.send = function (req, res) {
     var mailOptions = {
       from: setting.email.email,
       to: req.body.to,
-      subject: "PEMIRA FT UNS 2020",
+      subject: "PEMIRA FISIP UNS 2021",
       html:
         "<h1>Halo " +
         req.body.name +
-        "</h1><p>Kami mengundang anda untuk mengikuti PEMIRA FT UNS 2020. Berikut kami lampirkan kartu pemilihan anda beserta dengan tata cara pemilihan.</p>",
+        "</h1><p>Kami mengundang anda untuk mengikuti PEMIRA FISIP UNS 2021. Berikut kami lampirkan kartu pemilihan anda beserta dengan tata cara pemilihan.</p>",
       attachments: [
         {
           filename:
@@ -77,9 +77,9 @@ exports.send = function (req, res) {
           content: votingCardImage,
         },
         {
-          filename: "Tata Cara Pemilihan PEMIRA FT UNS 2020.pdf",
+          filename: "Tata Cara Pemilihan PEMIRA FISIP UNS 2021.pdf",
           contentType: "application/pdf",
-          path: "http://52.163.218.138/procedure.pdf",
+          path: "http://52.170.214.236/procedure.pdf",
         },
       ],
     };
