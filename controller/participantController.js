@@ -3915,11 +3915,6 @@ exports.new = function (req, res) {
           }
         );
       });
-
-      return res.json({
-        message: "New Participant Created!",
-        data: participant,
-      });
     });
   });
 };
