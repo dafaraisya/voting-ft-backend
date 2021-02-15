@@ -1314,17 +1314,7 @@ exports.new = function (req, res) {
     participant.save(function (err) {
       if (err) return res.status(500).json(err);
 
-      Session.findById("6024dcade5ad344951df0c08", function (err, session) {
-        if (err) return res.status(500).json(err);
-        session.total_participant++;
-        Session.findOneAndUpdate({ _id: session._id }, { $set: session }).then(
-          (session) => {
-            if (session) {
-            } else {
-            }
-          }
-        );
-      });
+      
     });
   });
 };
